@@ -27,6 +27,7 @@ client = TestClient(app)
 
 
 def setup_function() -> None:
+    app.dependency_overrides[get_db] = override_get_db
     Base.metadata.create_all(bind=engine)
 
 

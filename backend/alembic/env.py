@@ -6,6 +6,7 @@ from sqlalchemy import engine_from_config, pool
 from app.db.base import Base
 from app.db.config import get_database_url
 from app.models import Employee
+from app.models import SalaryRecord
 
 
 config = context.config

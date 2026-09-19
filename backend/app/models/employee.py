@@ -1,9 +1,13 @@
 from datetime import datetime, timezone
+from typing import TYPE_CHECKING
 
 from sqlalchemy import DateTime, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+
+if TYPE_CHECKING:
+    from app.models.salary import SalaryRecord
 
 
 def utc_now() -> datetime:
@@ -74,4 +78,9 @@ class Employee(Base):
         nullable=False,
         default=utc_now,
         onupdate=utc_now,
+    )
+
+    salary_records: Mapped[list["SalaryRecord"]] = relationship(
+        back_populates="employee",
+        cascade="all, delete-orphan",
     )
