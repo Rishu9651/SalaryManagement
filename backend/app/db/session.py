@@ -6,3 +6,11 @@ from app.db.config import get_database_url
 
 engine = create_engine(get_database_url(), pool_pre_ping=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
+
+
+def get_db():
+	database = SessionLocal()
+	try:
+		yield database
+	finally:
+		database.close()
