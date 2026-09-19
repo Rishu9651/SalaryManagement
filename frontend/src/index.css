@@ -1,0 +1,23 @@
+:root {
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  color: #182b2a;
+  background: #f3efe5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #f3efe5 0%, #e7eee9 100%);
+}
+
+#root {
+  min-height: 100vh;
+}

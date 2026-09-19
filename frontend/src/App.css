@@ -1,0 +1,26 @@
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12rem 2rem;
+}
+
+.eyebrow {
+  color: #b94b2f;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+h1 {
+  margin: 1.25rem 0 0.75rem;
+  color: #182b2a;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2.75rem, 8vw, 5.5rem);
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+.status {
+  color: #526563;
+  font-size: 1.1rem;
+}
