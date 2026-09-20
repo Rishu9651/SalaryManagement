@@ -1,4 +1,4 @@
-function EmployeeTable({ employees, onEdit, onDeactivate }) {
+function EmployeeTable({ employees, onView, onEdit, onDeactivate }) {
   return (
     <div className="table-wrap">
       <table className="employee-table">
@@ -18,7 +18,7 @@ function EmployeeTable({ employees, onEdit, onDeactivate }) {
           {employees.map((employee) => (
             <tr key={employee.id}>
               <td>{employee.employee_code}</td>
-              <td>{employee.first_name} {employee.last_name}</td>
+              <td><button type="button" className="link-button" onClick={() => onView(employee)}>{employee.first_name} {employee.last_name}</button></td>
               <td>{employee.email}</td>
               <td>{employee.country}</td>
               <td>{employee.department}</td>

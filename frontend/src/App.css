@@ -184,6 +184,77 @@ select {
   background: #ece7e5;
 }
 
+.link-button {
+  padding: 0;
+  color: #23734b;
+  background: transparent;
+  font-weight: 700;
+}
+
+.employee-summary,
+.salary-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #d8e0d9;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.employee-summary h1,
+.salary-section h2 {
+  margin: 0.5rem 0 1.25rem;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.details-grid div {
+  padding: 0.8rem;
+  background: #f4f7f3;
+}
+
+.details-grid dt {
+  color: #526563;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.details-grid dd {
+  margin: 0.35rem 0 0;
+}
+
+.compensation-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+textarea {
+  resize: vertical;
+  font: inherit;
+}
+
+@media (max-width: 760px) {
+  .details-grid,
+  .compensation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
 .table-actions {
   display: flex;
   gap: 0.5rem;

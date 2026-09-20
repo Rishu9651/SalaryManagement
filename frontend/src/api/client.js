@@ -11,7 +11,9 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     const message = error.response?.data?.detail || error.message || 'Request failed'
-    return Promise.reject(new Error(message))
+    const normalizedError = new Error(message)
+    normalizedError.status = error.response?.status
+    return Promise.reject(normalizedError)
   },
 )
 

@@ -9,7 +9,7 @@ const COUNTRIES = ['India', 'United States', 'United Kingdom', 'Germany', 'Canad
 const DEPARTMENTS = ['Engineering', 'Product', 'Finance', 'Human Resources', 'Sales', 'Marketing', 'Operations', 'Legal', 'Customer Support']
 const PAGE_SIZE = 25
 
-function EmployeesPage() {
+function EmployeesPage({ onView }) {
   const [filters, setFilters] = useState({ search: '', country: '', department: '' })
   const [page, setPage] = useState(1)
   const [data, setData] = useState({ items: [], total: 0, page: 1, total_pages: 0 })
@@ -105,7 +105,7 @@ function EmployeesPage() {
       {state === 'refreshing' && <p className="status" role="status">Refreshing employees...</p>}
       {state === 'error' && <button type="button" onClick={loadEmployees}>Try again</button>}
       {state === 'success' && data.items.length === 0 && <p className="empty-state">No employees match the current filters.</p>}
-      {state === 'success' && data.items.length > 0 && <EmployeeTable employees={data.items} onEdit={openEditForm} onDeactivate={handleDeactivate} />}
+      {state === 'success' && data.items.length > 0 && <EmployeeTable employees={data.items} onView={onView} onEdit={openEditForm} onDeactivate={handleDeactivate} />}
       {state === 'success' && <Pagination page={data.page || page} totalPages={data.total_pages} onPageChange={setPage} />}
 
       {isFormOpen && <EmployeeForm key={formEmployee?.id || 'new'} employee={formEmployee} isSubmitting={isSubmitting} onSubmit={handleFormSubmit} onCancel={() => setIsFormOpen(false)} />}
