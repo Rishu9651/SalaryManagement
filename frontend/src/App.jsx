@@ -1,8 +1,8 @@
 import './App.css'
-import HealthStatusPage from './pages/HealthStatusPage'
+import EmployeesPage from './pages/EmployeesPage'
 
 function App() {
-  return <HealthStatusPage />
+  return <EmployeesPage />
 }
 
 export default App
