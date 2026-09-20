@@ -431,7 +431,7 @@ The demo video covers:
 - Technical decisions and trade-offs
 - Testing and performance considerations
 
-**Demo Video:** [Watch the project demo](<YOUR_VIDEO_LINK>)
+**Demo Video:** [Watch the project demo](https://drive.google.com/file/d/18biRjYpWEnmMmp4IkZeDEeyjZgESWk0Q/view?usp=sharing)
 
 ### Live Application
 
