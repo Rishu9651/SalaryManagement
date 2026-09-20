@@ -15,6 +15,7 @@ from app.models.salary import SalaryRecord
 SEED_SIZE = 10_000
 DEFAULT_SEED = 20260920
 DEFAULT_EFFECTIVE_FROM = date(2026, 1, 1)
+DEFAULT_CREATED_AT = datetime(2026, 1, 1, tzinfo=timezone.utc)
 
 COUNTRY_CURRENCIES = {
     "India": "INR",
@@ -93,7 +94,7 @@ def generate_seed_data(
         raise ValueError("count must not be negative")
 
     rng = random.Random(random_seed)
-    created_at = datetime.now(timezone.utc)
+    created_at = DEFAULT_CREATED_AT
     rows: list[dict[str, Any]] = []
 
     for number in range(1, count + 1):

@@ -133,6 +133,21 @@ def test_salary_validation_rejects_negative_values_and_missing_currency() -> Non
     )
     assert response.status_code == 422
 
+    response = client.post(
+        f"/api/employees/{employee['id']}/salary",
+        json=salary_payload(currency="US"),
+    )
+    assert response.status_code == 422
+
+
+def test_creating_salary_for_missing_employee_returns_404() -> None:
+    response = client.post(
+        "/api/employees/9999/salary",
+        json=salary_payload(),
+    )
+
+    assert response.status_code == 404
+
 
 def test_invalid_and_overlapping_salary_dates_are_rejected() -> None:
     employee = create_employee()

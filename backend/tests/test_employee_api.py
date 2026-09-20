@@ -77,6 +77,15 @@ def test_invalid_employee_data_is_rejected() -> None:
     assert response.status_code == 422
 
 
+def test_required_employee_fields_are_rejected() -> None:
+    payload = employee_payload()
+    del payload["department"]
+
+    response = client.post("/api/employees", json=payload)
+
+    assert response.status_code == 422
+
+
 def test_duplicate_employee_code_is_rejected() -> None:
     create_employee()
 
@@ -137,6 +146,59 @@ def test_list_pagination_search_and_filters() -> None:
     )
     assert response.json()["total"] == 1
     assert response.json()["items"][0]["employee_code"] == "EMP003"
+
+
+def test_employee_search_matches_code_first_name_last_name_and_email() -> None:
+    create_employee(
+        code="CODE_MATCH",
+        email="unique.person@example.com",
+        first_name="Unique",
+        last_name="Person",
+    )
+
+    for search in ("CODE_MATCH", "Unique", "Person", "unique.person@example.com"):
+        response = client.get("/api/employees", params={"search": search})
+
+        assert response.status_code == 200
+        assert response.json()["total"] == 1
+        assert response.json()["items"][0]["employee_code"] == "CODE_MATCH"
+
+
+def test_employee_list_supports_country_department_and_combined_filters() -> None:
+    create_employee(
+        code="EMP002",
+        email="jane@example.com",
+        first_name="Jane",
+        country="United States",
+        department="Finance",
+    )
+    create_employee(
+        code="EMP003",
+        email="alex@example.com",
+        first_name="Alex",
+        country="India",
+        department="Finance",
+    )
+
+    response = client.get("/api/employees", params={"country": "India"})
+    assert response.json()["total"] == 1
+
+    response = client.get("/api/employees", params={"department": "Finance"})
+    assert response.json()["total"] == 2
+
+    response = client.get(
+        "/api/employees",
+        params={"country": "India", "department": "Finance"},
+    )
+    assert response.json()["total"] == 1
+    assert response.json()["items"][0]["employee_code"] == "EMP003"
+
+
+def test_employee_list_rejects_invalid_pagination_parameters() -> None:
+    for params in ({"page": 0}, {"page_size": 0}, {"page_size": 101}):
+        response = client.get("/api/employees", params=params)
+
+        assert response.status_code == 422
 
 
 def test_pagination_returns_requested_page() -> None:
