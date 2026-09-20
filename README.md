@@ -396,3 +396,45 @@ SQLAlchemy
    ↓
 PostgreSQL
 ```
+
+## Submission
+
+### Repository
+
+This repository contains the complete source code, tests, documentation, and deployment configuration for the Salary Management System.
+
+### Project Artifacts
+
+The following artifacts are included in the repository:
+
+- [Requirements](docs/requirements.md) — Product requirements and project scope
+- [Architecture](docs/architecture.md) — System architecture, components, request flow, and data model
+- [AI Prompts and Instructions](docs/ai-prompts.md) — AI-assisted development approach and prompts
+- [Technical Trade-offs](docs/tradeoffs.md) — Key technical decisions and alternatives considered
+- [Testing](docs/testing.md) — Test coverage, test results, and testing approach
+- [Performance Verification](docs/performance-verification.md) — Performance considerations and verification with the 10,000-employee dataset
+- [Deployment](docs/deployment.md) — Production deployment and environment configuration
+
+### Demo Video
+
+The demo video covers:
+
+- Application overview
+- Employee management
+- Employee search and filtering
+- Salary management
+- Salary history
+- Compensation analytics
+- Mock HR requests
+- Request 05
+- AI-assisted development
+- Technical decisions and trade-offs
+- Testing and performance considerations
+
+**Demo Video:** [Watch the project demo](<YOUR_VIDEO_LINK>)
+
+### Live Application
+
+**Frontend:** https://salary-management-pied.vercel.app/
+
+**API Documentation:** https://salary-management-api-fpev.onrender.com/docs
