@@ -36,10 +36,10 @@ function SalaryForm({ isSubmitting, onSubmit, onCancel }) {
         <div className="modal-heading"><div><p className="eyebrow">COMPENSATION</p><h2 id="salary-form-title">Revise Salary</h2></div><button type="button" className="icon-button" aria-label="Close form" onClick={onCancel}>×</button></div>
         <form onSubmit={handleSubmit} noValidate>
           <div className="form-grid">
-            <label>Base Salary<input name="base_salary" type="number" min="0.01" step="0.01" value={form.base_salary} onChange={handleChange} /></label>
-            <label>Bonus<input name="bonus" type="number" min="0" step="0.01" value={form.bonus} onChange={handleChange} /></label>
-            <label>Currency<select name="currency" value={form.currency} onChange={handleChange}><option value="">Select currency</option>{CURRENCIES.map((currency) => <option key={currency}>{currency}</option>)}</select></label>
-            <label>Effective date<input name="effective_from" type="date" value={form.effective_from} onChange={handleChange} /></label>
+            <label>Base Salary<span className="required-marker">Required</span><input name="base_salary" type="number" min="0.01" step="0.01" value={form.base_salary} onChange={handleChange} /></label>
+            <label>Bonus<span className="field-hint">Optional</span><input name="bonus" type="number" min="0" step="0.01" value={form.bonus} onChange={handleChange} /></label>
+            <label>Currency<span className="required-marker">Required</span><select name="currency" value={form.currency} onChange={handleChange}><option value="">Select currency</option>{CURRENCIES.map((currency) => <option key={currency}>{currency}</option>)}</select></label>
+            <label>Effective date<span className="required-marker">Required</span><input name="effective_from" type="date" value={form.effective_from} onChange={handleChange} /></label>
             <label className="field-wide">Reason<textarea name="reason" maxLength="500" value={form.reason} onChange={handleChange} rows="3" /></label>
           </div>
           {error && <p className="form-error" role="alert">{error}</p>}

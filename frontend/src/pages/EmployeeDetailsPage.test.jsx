@@ -51,7 +51,7 @@ describe('EmployeeDetailsPage', () => {
 
     expect(screen.getByText('Loading compensation...')).toBeInTheDocument()
     expect(await screen.findByText('Maya Shah')).toBeInTheDocument()
-    expect(screen.getByText('1500000.00 INR')).toBeInTheDocument()
+    expect(screen.getAllByText(/15,00,000\.00/)).toHaveLength(2)
     expect(screen.getAllByText('Initial salary')).toHaveLength(2)
     expect(getCurrentSalary).toHaveBeenCalledWith(7)
     expect(getSalaryHistory).toHaveBeenCalledWith(7)
@@ -70,13 +70,13 @@ describe('EmployeeDetailsPage', () => {
   it('renders salary history records', async () => {
     render(<EmployeeDetailsPage employee={employee} onBack={vi.fn()} />)
 
-    expect(await screen.findByText('2025-12-31')).toBeInTheDocument()
+    expect(await screen.findByText('31 Dec 2025')).toBeInTheDocument()
     expect(screen.getByText('Promotion')).toBeInTheDocument()
   })
 
   it('validates the salary form before submission', async () => {
     render(<EmployeeDetailsPage employee={employee} onBack={vi.fn()} />)
-    await screen.findByText('1500000.00 INR')
+    await screen.findByRole('button', { name: 'Revise Salary' })
     fireEvent.click(screen.getByRole('button', { name: 'Revise Salary' }))
     fireEvent.click(screen.getByRole('button', { name: 'Save salary' }))
 
@@ -86,7 +86,7 @@ describe('EmployeeDetailsPage', () => {
 
   it('submits a salary revision and refreshes current salary and history', async () => {
     render(<EmployeeDetailsPage employee={employee} onBack={vi.fn()} />)
-    await screen.findByText('1500000.00 INR')
+    await screen.findByRole('button', { name: 'Revise Salary' })
     fireEvent.click(screen.getByRole('button', { name: 'Revise Salary' }))
     const dialog = screen.getByRole('dialog')
     const values = {
@@ -111,12 +111,12 @@ describe('EmployeeDetailsPage', () => {
   it('shows a readable API error when salary submission fails', async () => {
     createSalary.mockRejectedValue(new Error('Salary effective date overlaps existing history'))
     render(<EmployeeDetailsPage employee={employee} onBack={vi.fn()} />)
-    await screen.findByText('1500000.00 INR')
+    await screen.findByRole('button', { name: 'Revise Salary' })
     fireEvent.click(screen.getByRole('button', { name: 'Revise Salary' }))
     const dialog = screen.getByRole('dialog')
-    fireEvent.change(within(dialog).getByLabelText('Base Salary'), { target: { value: '1800000' } })
-    fireEvent.change(within(dialog).getByLabelText('Currency'), { target: { value: 'INR' } })
-    fireEvent.change(within(dialog).getByLabelText('Effective date'), { target: { value: '2027-01-01' } })
+    fireEvent.change(within(dialog).getByRole('spinbutton', { name: /Base Salary/i }), { target: { value: '1800000' } })
+    fireEvent.change(within(dialog).getByRole('combobox', { name: /Currency/i }), { target: { value: 'INR' } })
+    fireEvent.change(dialog.querySelector('input[name="effective_from"]'), { target: { value: '2027-01-01' } })
     fireEvent.click(within(dialog).getByRole('button', { name: 'Save salary' }))
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Salary effective date overlaps existing history')

@@ -1,3 +1,5 @@
+import { formatStatus } from '../utils/formatters'
+
 function EmployeeSummary({ employee, onBack }) {
   return (
     <section className="employee-summary">
@@ -10,7 +12,7 @@ function EmployeeSummary({ employee, onBack }) {
         <div><dt>Country</dt><dd>{employee.country}</dd></div>
         <div><dt>Department</dt><dd>{employee.department}</dd></div>
         <div><dt>Job Title</dt><dd>{employee.job_title}</dd></div>
-        <div><dt>Status</dt><dd><span className={`status-pill status-${employee.status}`}>{employee.status}</span></dd></div>
+        <div><dt>Status</dt><dd><span className={`status-pill status-${employee.status}`}><span className="status-dot" aria-hidden="true" />{formatStatus(employee.status)}</span></dd></div>
       </dl>
     </section>
   )

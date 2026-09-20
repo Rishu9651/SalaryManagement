@@ -8,7 +8,7 @@ import SalaryDistribution from '../components/dashboard/SalaryDistribution'
 import SalaryDistributionChart from '../components/dashboard/SalaryDistributionChart'
 import SummaryCards from '../components/dashboard/SummaryCards'
 
-function DashboardPage({ onNavigate }) {
+function DashboardPage() {
   const [data, setData] = useState(null)
   const [state, setState] = useState('loading')
   const [error, setError] = useState('')
@@ -37,8 +37,7 @@ function DashboardPage({ onNavigate }) {
   return (
     <main className="employees-page dashboard-page">
       <header className="page-header">
-        <div><p className="eyebrow">ACME / SALARY MANAGEMENT</p><h1>Compensation Dashboard</h1><p className="page-subtitle">Current workforce and compensation insights by currency.</p></div>
-        <button type="button" onClick={() => onNavigate('employees')}>Employees</button>
+        <div><p className="eyebrow">COMPENSATION OVERVIEW</p><h1>Compensation Dashboard</h1><p className="page-subtitle">Current workforce and compensation insights by currency.</p></div>
       </header>
       {state === 'loading' && <p className="status" role="status">Loading dashboard...</p>}
       {state === 'error' && <p className="form-error" role="alert">Unable to load dashboard: {error}</p>}

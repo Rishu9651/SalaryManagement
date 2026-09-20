@@ -64,13 +64,13 @@ function EmployeeForm({ employee, isSubmitting, onSubmit, onCancel }) {
         </div>
         <form onSubmit={handleSubmit} noValidate>
           <div className="form-grid">
-            <label>Employee code<input name="employee_code" value={form.employee_code} onChange={handleChange} disabled={isEditing} required={!isEditing} /></label>
-            <label>Email<input name="email" type="email" value={form.email} onChange={handleChange} required /></label>
-            <label>First name<input name="first_name" value={form.first_name} onChange={handleChange} required /></label>
-            <label>Last name<input name="last_name" value={form.last_name} onChange={handleChange} required /></label>
-            <label>Country<select name="country" value={form.country} onChange={handleChange} required><option value="">Select country</option>{COUNTRIES.map((country) => <option key={country}>{country}</option>)}</select></label>
-            <label>Department<select name="department" value={form.department} onChange={handleChange} required><option value="">Select department</option>{DEPARTMENTS.map((department) => <option key={department}>{department}</option>)}</select></label>
-            <label className="field-wide">Job title<input name="job_title" value={form.job_title} onChange={handleChange} required /></label>
+            <label>Employee code{!isEditing && <span className="required-marker">Required</span>}<input name="employee_code" value={form.employee_code} onChange={handleChange} disabled={isEditing} required={!isEditing} /></label>
+            <label>Email<span className="required-marker">Required</span><input name="email" type="email" value={form.email} onChange={handleChange} required /></label>
+            <label>First name<span className="required-marker">Required</span><input name="first_name" value={form.first_name} onChange={handleChange} required /></label>
+            <label>Last name<span className="required-marker">Required</span><input name="last_name" value={form.last_name} onChange={handleChange} required /></label>
+            <label>Country<span className="required-marker">Required</span><select name="country" value={form.country} onChange={handleChange} required><option value="">Select country</option>{COUNTRIES.map((country) => <option key={country}>{country}</option>)}</select></label>
+            <label>Department<span className="required-marker">Required</span><select name="department" value={form.department} onChange={handleChange} required><option value="">Select department</option>{DEPARTMENTS.map((department) => <option key={department}>{department}</option>)}</select></label>
+            <label className="field-wide">Job title<span className="required-marker">Required</span><input name="job_title" value={form.job_title} onChange={handleChange} required /></label>
           </div>
           {error && <p className="form-error" role="alert">{error}</p>}
           <div className="form-actions">

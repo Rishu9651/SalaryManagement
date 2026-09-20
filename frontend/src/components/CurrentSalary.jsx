@@ -1,3 +1,5 @@
+import { formatCurrency, formatDate } from '../utils/formatters'
+
 function CurrentSalary({ salary, onRevise }) {
   return (
     <section className="salary-section">
@@ -7,10 +9,10 @@ function CurrentSalary({ salary, onRevise }) {
       </div>
       {salary ? (
         <dl className="details-grid compensation-grid">
-          <div><dt>Base Salary</dt><dd>{salary.base_salary} {salary.currency}</dd></div>
-          <div><dt>Bonus</dt><dd>{salary.bonus} {salary.currency}</dd></div>
+          <div><dt>Base Salary</dt><dd className="money-value">{formatCurrency(salary.base_salary, salary.currency)}</dd></div>
+          <div><dt>Bonus</dt><dd className="money-value">{formatCurrency(salary.bonus, salary.currency)}</dd></div>
           <div><dt>Currency</dt><dd>{salary.currency}</dd></div>
-          <div><dt>Effective From</dt><dd>{salary.effective_from}</dd></div>
+          <div><dt>Effective From</dt><dd>{formatDate(salary.effective_from)}</dd></div>
           {salary.reason && <div className="field-wide"><dt>Reason</dt><dd>{salary.reason}</dd></div>}
         </dl>
       ) : <p className="empty-state">No current salary record.</p>}

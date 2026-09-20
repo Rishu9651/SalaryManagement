@@ -83,7 +83,7 @@ describe('DashboardPage', () => {
     expect(screen.getByText('92')).toBeInTheDocument()
     expect(screen.getByText('Employee Count by Country')).toBeInTheDocument()
     expect(screen.getAllByText('Salary Distribution')).toHaveLength(2)
-    expect(screen.getAllByText('1500000.00 INR')).toHaveLength(2)
+    expect(screen.getAllByText(/15,00,000\.00/)).toHaveLength(2)
     expect(screen.getAllByText('India')).toHaveLength(2)
     expect(screen.getByText('Engineering')).toBeInTheDocument()
     expect(screen.getAllByText('10-20L')).toHaveLength(2)
@@ -103,8 +103,8 @@ describe('DashboardPage', () => {
   it('keeps compensation values separated by currency', async () => {
     render(<DashboardPage onNavigate={vi.fn()} />)
 
-    await screen.findAllByText('1500000.00 INR')
-    expect(screen.getAllByText('95000.00 USD')).toHaveLength(2)
+    await screen.findAllByText(/15,00,000\.00/)
+    expect(screen.getAllByText('$95,000.00')).toHaveLength(2)
     expect(screen.queryByText(/2450000/)).not.toBeInTheDocument()
   })
 
@@ -128,12 +128,4 @@ describe('DashboardPage', () => {
     expect(screen.queryByText('Summary by Currency')).not.toBeInTheDocument()
   })
 
-  it('navigates to employees from the dashboard', async () => {
-    const onNavigate = vi.fn()
-    render(<DashboardPage onNavigate={onNavigate} />)
-    await screen.findByText('100')
-
-    screen.getByRole('button', { name: 'Employees' }).click()
-    expect(onNavigate).toHaveBeenCalledWith('employees')
-  })
 })

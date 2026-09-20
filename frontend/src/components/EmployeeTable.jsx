@@ -1,3 +1,5 @@
+import { formatStatus } from '../utils/formatters'
+
 function EmployeeTable({ employees, onView, onEdit, onDeactivate }) {
   return (
     <div className="table-wrap">
@@ -23,7 +25,7 @@ function EmployeeTable({ employees, onView, onEdit, onDeactivate }) {
               <td>{employee.country}</td>
               <td>{employee.department}</td>
               <td>{employee.job_title}</td>
-              <td><span className={`status-pill status-${employee.status}`}>{employee.status}</span></td>
+              <td><span className={`status-pill status-${employee.status}`}><span className="status-dot" aria-hidden="true" />{formatStatus(employee.status)}</span></td>
               <td className="table-actions">
                 <button type="button" onClick={() => onEdit(employee)}>Edit</button>
                 <button

@@ -129,7 +129,7 @@ describe('EmployeesPage', () => {
     render(<EmployeesPage />)
     await screen.findByText('EMP00001')
     fireEvent.click(screen.getByRole('button', { name: 'Edit' }))
-    fireEvent.change(screen.getByLabelText('First name'), { target: { value: 'Amelia' } })
+    fireEvent.change(screen.getByRole('textbox', { name: /First name/i }), { target: { value: 'Amelia' } })
     fireEvent.click(screen.getByRole('button', { name: 'Save changes' }))
 
     await waitFor(() => expect(updateEmployee).toHaveBeenCalledWith(1, expect.objectContaining({ first_name: 'Amelia' })))
