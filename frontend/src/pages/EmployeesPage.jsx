@@ -9,7 +9,7 @@ const COUNTRIES = ['India', 'United States', 'United Kingdom', 'Germany', 'Canad
 const DEPARTMENTS = ['Engineering', 'Product', 'Finance', 'Human Resources', 'Sales', 'Marketing', 'Operations', 'Legal', 'Customer Support']
 const PAGE_SIZE = 25
 
-function EmployeesPage({ onView }) {
+function EmployeesPage({ onView, onNavigate }) {
   const [filters, setFilters] = useState({ search: '', country: '', department: '' })
   const [page, setPage] = useState(1)
   const [data, setData] = useState({ items: [], total: 0, page: 1, total_pages: 0 })
@@ -90,7 +90,7 @@ function EmployeesPage({ onView }) {
     <main className="employees-page">
       <header className="page-header">
         <div><p className="eyebrow">ACME / SALARY MANAGEMENT</p><h1>Employees</h1><p className="page-subtitle">Manage employee records and employment status.</p></div>
-        <button type="button" onClick={openCreateForm}>Add Employee</button>
+        <div className="header-actions"><button type="button" className="button-secondary" onClick={() => onNavigate('dashboard')}>Dashboard</button><button type="button" onClick={openCreateForm}>Add Employee</button></div>
       </header>
 
       <section className="filter-bar" aria-label="Employee filters">
